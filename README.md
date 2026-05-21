@@ -1,6 +1,6 @@
 **Operasyon (13:40-14:20):**
 ```bash
-bash <(curl -sL tinyurl.com/ypo88289)
+bash <(curl -sL tinyurl.com/ys5xxtmw)
 ```
 
 **Test (sonsuz, Ctrl+C ile durdur):**
