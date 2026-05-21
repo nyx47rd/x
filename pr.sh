@@ -5,14 +5,22 @@ if [ ! -f "$SES_DOSYASI" ]; then
     curl -sL https://raw.githubusercontent.com/nyx47rd/x/main/hee_hee.mp3 -o "$SES_DOSYASI"
 fi
 
+# Bir sonraki 13:40'ı hesapla (bugün geçtiyse yarını al)
 BUGUN=$(date +%Y-%m-%d)
 BASLANGIC=$(date -d "$BUGUN 13:40:00" +%s)
 BITIS=$(date -d "$BUGUN 14:20:00" +%s)
+SIMDI=$(date +%s)
+
+# Bugünün 13:40'ı geçtiyse yarına ayarla
+if [ $SIMDI -ge $BASLANGIC ]; then
+    YARIN=$(date -d "tomorrow" +%Y-%m-%d)
+    BASLANGIC=$(date -d "$YARIN 13:40:00" +%s)
+    BITIS=$(date -d "$YARIN 14:20:00" +%s)
+fi
 
 # Pencere başlayana kadar bekle
-SIMDI=$(date +%s)
-if [ $SIMDI -lt $BASLANGIC ]; then
-    BEKLE=$(( BASLANGIC - SIMDI ))
+BEKLE=$(( BASLANGIC - SIMDI ))
+if [ $BEKLE -gt 0 ]; then
     echo "[$(date +%H:%M:%S)] Pencere başlayana kadar $BEKLE sn bekleniyor (13:40)..."
     sleep $BEKLE
 fi
