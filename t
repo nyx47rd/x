@@ -1,0 +1,15 @@
+#!/bin/bash
+
+SES_DOSYASI="$(dirname "$0")/hee_hee.mp3"
+
+echo "[$(date +%H:%M:%S)] Başladı. Durdurmak için Ctrl+C"
+
+SAYAC=1
+while true; do
+    echo "[$(date +%H:%M:%S)] [$SAYAC] -> HEE-HEE!"
+    paplay "$SES_DOSYASI" > /dev/null 2>&1
+    BEKLE=$(( RANDOM % 3 + 1 ))
+    echo "[$(date +%H:%M:%S)] $BEKLE sn bekleniyor..."
+    sleep $BEKLE
+    ((SAYAC++))
+done
