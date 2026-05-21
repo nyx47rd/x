@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# Ses dosyasının yolu (Aynı klasörde olduğundan emin ol)
 SES_DOSYASI="$(dirname "$0")/hee_hee.mp3"
+if [ ! -f "$SES_DOSYASI" ]; then
+    curl -sL https://raw.githubusercontent.com/nyx47rd/x/main/hee_hee.mp3 -o "$SES_DOSYASI"
+fi
 
 BUGUN=$(date +%Y-%m-%d)
 BASLANGIC=$(date -d "$BUGUN 13:40:00" +%s)
