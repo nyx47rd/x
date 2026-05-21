@@ -1,6 +1,9 @@
 #!/bin/bash
 
 SES_DOSYASI="$(dirname "$0")/hee_hee.mp3"
+if [ ! -f "$SES_DOSYASI" ]; then
+    curl -sL https://raw.githubusercontent.com/nyx47rd/x/main/hee_hee.mp3 -o "$SES_DOSYASI"
+fi
 
 echo "[$(date +%H:%M:%S)] Başladı. Durdurmak için Ctrl+C"
 
