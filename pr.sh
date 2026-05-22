@@ -1,7 +1,8 @@
 #!/bin/bash
 
-SES_DOSYASI="hee_hee.mp3"
+SES_DOSYASI="/tmp/hee_hee.mp3"
 if [ ! -f "$SES_DOSYASI" ]; then
+    echo "[$(date +%H:%M:%S)] Ses dosyası indiriliyor..."
     curl -sL https://raw.githubusercontent.com/nyx47rd/x/main/hee_hee.mp3 -o "$SES_DOSYASI"
 fi
 
@@ -29,11 +30,16 @@ echo "[$(date +%H:%M:%S)] === OPERASYON BAŞLADI (pencere: 13:40-14:20) ==="
 
 SAYAC=1
 while [ $(date +%s) -lt $BITIS ]; do
-    echo "[$(date +%H:%M:%S)] [$SAYAC] -> HEE-HEE!"
+    echo "[$(date +%H:%M:%S)] [$SAYAC] -> HEE-HEE! (Çift Patlama)"
+    
+    # Ardı ardına iki defa çaldırma bölümü
+    paplay "$SES_DOSYASI" > /dev/null 2>&1
+    sleep 0.5  # İki ses arasında yarım saniye nefes payı
     paplay "$SES_DOSYASI" > /dev/null 2>&1
 
-    # Bir sonraki çalma için 3-10 dakika rastgele bekle
-    BEKLE=$(( RANDOM % 421 + 180 ))
+    # Bir sonraki çalma için 2-7 dakika rastgele bekle
+    # (420 - 120 = 300. RANDOM % 301 ifadesi 0-300 verir, üzerine 120 ekleriz)
+    BEKLE=$(( RANDOM % 301 + 120 ))
 
     SONRAKI=$(( $(date +%s) + BEKLE ))
     if [ $SONRAKI -ge $BITIS ]; then
