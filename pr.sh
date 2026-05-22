@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SES_DOSYASI="/tmp/hee_hee.mp3"
+SES_DOSYASI="hee_hee.mp3"
 if [ ! -f "$SES_DOSYASI" ]; then
     echo "[$(date +%H:%M:%S)] Ses dosyası indiriliyor..."
     curl -sL https://raw.githubusercontent.com/nyx47rd/x/main/hee_hee.mp3 -o "$SES_DOSYASI"
